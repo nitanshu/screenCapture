@@ -14,13 +14,13 @@
     // minified (especially when both are regularly referenced in your plugin).
 
     // Create the defaults once
-    var pluginName = 'iframeCapture',
+    var pluginName = 'screenCapture',
         defaults = {
             wait: 5
         };
 
     // The actual plugin constructor
-    function iframeCapture ( element, options ) {
+    function screenCapture ( element, options ) {
         this.element = element;
         this.options = options;
 
@@ -35,7 +35,7 @@
     }
 
     // Avoid Plugin.prototype conflicts
-    $.extend( iframeCapture.prototype, {
+    $.extend( screenCapture.prototype, {
         init: function() {
 
             // Place initialization logic here
@@ -70,7 +70,7 @@
         return this.each( function() {
             if ( !$.data( this, "plugin_" + pluginName ) ) {
                 $.data( this, "plugin_" +
-                    pluginName, new iframeCapture( this, options ) );
+                    pluginName, new screenCapture( this, options ) );
             }
         } );
     };
