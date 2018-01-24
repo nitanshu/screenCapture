@@ -16,7 +16,14 @@
     // Create the defaults once
     var pluginName = 'screenCapture',
         defaults = {
-            wait: 5
+            wait: 5,
+            api_url: 'http://localhost:3000/screen_captures',
+            service_url: window.location.href
+            //ajaxSettings: {
+            //    async: false,
+            //    global: false,
+            //    dataType: 'script'
+            //}
         };
 
     // The actual plugin constructor
@@ -35,7 +42,7 @@
     }
 
     // Avoid Plugin.prototype conflicts
-    $.extend( screenCapture.prototype, {
+    $.extend(screenCapture.prototype, {
         init: function() {
 
             // Place initialization logic here
@@ -44,23 +51,27 @@
             // and this.settings
             // you can add more functions like the one below and
             // call them like the example below
-            this.insertButton(this.element);
-            this.captureScreenShot(url);
+            this.insertButton(this.element, this.settings);
         },
-        insertButton: function(element){
-            var div = $('.'+element.className);
+        insertButton: function(element, settings){
+            var parent_element = $('.'+element.className);
             var screen_capture_button = document.createElement('button');
             screen_capture_button.type = 'submit';
-            screen_capture_button.value = 'screen';
-            screen_capture_button.name = 'screen';
+            screen_capture_button.value = 'screen_capture';
+            screen_capture_button.name = 'screen_capture';
             screen_capture_button.textContent = 'Capture the Screen';
-            screen_capture_button.className = 'iframe_capture';
-            div.append(screen_capture_button);
+            screen_capture_button.className = 'screen_capture';
+            parent_element.append(screen_capture_button);
+            $('.'+screen_capture_button.className).on('click', function(e){
+                screenCapture.prototype.captureScreenShot(element, settings);
+            });
         },
-        captureScreenShot: function( url ) {
-
-            // some logic
-            $( this.element ).text( text );
+        captureScreenShot: function(element, settings) {
+            $.ajax({
+                url: settings.api_url,
+                type: "POST",
+                data: {screen_capture: {url: settings.service_url}}
+            });
         }
     } );
 
