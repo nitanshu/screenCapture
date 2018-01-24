@@ -1,0 +1,26 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src='iframe_capture.js'></script>
+
+<html>
+<body>
+
+<iframe src="https://edswell.com" height="200" width="200"></iframe>
+
+<p> Hello this is p tag</p>
+<div class="button_screen"></div>
+<button class="screencapture">Take Screenshot</button>
+</body>
+</html>
+
+<script>
+
+            $('.button_screen').iframeCapture({
+                url: 'http://localhost:3000'
+            });
+//            $.ajax({
+//                url: 'http://localhost:3000/screen_captures',
+//                type: 'script',
+//                method: 'post',
+//                data: {screen_capture: {url: window.location.href}}
+//            });
+</script>
