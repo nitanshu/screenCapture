@@ -18,7 +18,6 @@
         defaults = {
             wait: 5,
             api_url: 'http://localhost:3000/screen_captures',
-            download_url: 'http://localhost:3000/screen_captures/download_file',
             service_url: window.location.href,
             ajaxSettings: {
                 async: false,
@@ -70,24 +69,14 @@
             $.ajax({
                 url: settings.api_url,
                 type: "POST",
-                data: {screen_capture: {url: settings.service_url}},
+                data: {screen_capture: {service_url: settings.service_url}},
                 success: function(data) {
-                    console.log(data, element);
-                    //screenCapture.prototype.getScreenShot(element, settings);
-                    $('.'+element.className).append('<img src="' + data.img_url + '"  width="50%" height="50%" />');
+                    screenCapture.prototype.showScreenShot(element, settings, data);
                 }
             });
         },
-        getScreenShot: function(element, settings){
-            $.ajax({
-                url: settings.download_url,
-                dataType: 'html',
-                success: function(data){
-                    console.log(data);
-                    //window.print(data);
-
-                }
-            });
+        showScreenShot: function(element, settings, data){
+            $('.'+element.className).append('<img src="' + data.img_url + '"  width="50%" height="50%" />');
         }
     } );
 
