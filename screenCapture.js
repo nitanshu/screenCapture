@@ -3,6 +3,8 @@
 ;( function( $, window, document, undefined ) {
 
     'use strict';
+    $('head').append('<link rel="stylesheet" href="screenCapture.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />');
 
     // undefined is used here as the undefined global variable in ECMAScript 3 is
     // mutable (ie. it can be changed by someone else). undefined isn't really being
@@ -58,7 +60,7 @@
             screen_capture_button.type = 'submit';
             screen_capture_button.value = 'screen_capture';
             screen_capture_button.name = 'screen_capture';
-            screen_capture_button.textContent = 'Capture the Screen';
+            screen_capture_button.innerHTML = '<i class="fa fa-camera" aria-hidden="true"></i>';
             screen_capture_button.className = 'screen_capture';
             parent_element.append(screen_capture_button);
             $('.'+screen_capture_button.className).on('click', function(e){
@@ -76,7 +78,7 @@
             });
         },
         showScreenShot: function(element, settings, data){
-            $('.'+element.className).append('<img src="' + data.img_url + '"  width="50%" height="50%" />');
+            $('.'+element.className).append('<img class="captured_image" src="' + data.img_url +'" />');
         }
     } );
 
