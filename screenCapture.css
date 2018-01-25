@@ -6,15 +6,11 @@
     height: 10%;
     border: 1px solid #ddd;
 }
+
 .screen_capture {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-}
-.screen_capture {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    right: 40px;
     background-color: #eee;
     border-radius: 50%;
     width: 50px;
