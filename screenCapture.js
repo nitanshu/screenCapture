@@ -20,7 +20,7 @@
     var pluginName = 'screenCapture',
         defaults = {
             wait: 5,
-            api_url: 'http://localhost:3001/screen_captures',
+            api_url: 'http://localhost:3000/screen_captures',
             service_url: window.location.href,
             ajaxSettings: {
                 async: false,
@@ -79,7 +79,7 @@
             });
         },
         showScreenShot: function(element, settings, data){
-            $('.'+element.className).append('<img class="captured_image" src="http://' + data.img_url +'" />');
+            $('.'+element.className).append('<div class="captured_image_container"><img class="captured_image" src="' + data.img_url +'" /></div>');
         }
     } );
 

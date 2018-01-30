@@ -1,23 +1,52 @@
-.captured_image {
-    position: fixed;
-    right: 20px;
-    bottom: 70px;
-    width: 10%;
-    height: 10%;
+.captured_image_container {
     border: 1px solid #ddd;
+    bottom: 80px;
+    height: 10%;
+    position: fixed;
+    right: 13px;
+    width: 10%;
 }
 
 .screen_capture {
-    position: fixed;
-    bottom: 20px;
-    right: 40px;
     background-color: #eee;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    box-shadow: 2px 0px 4px 0px #eee;
     border: 1px solid #ddd;
+    border-radius: 50%;
+    bottom: 20px;
+    box-shadow: 2px 0 4px 0 #eee;
+    cursor: pointer;
     font-size: 22px;
-    cursor:pointer;
-    outline:none;
+    height: 50px;
+    margin: 0 auto;
+    outline: medium none;
+    position: fixed;
+    right: 50px;
+    width: 50px;
+}
+
+.captured_image {
+    width: 100%;
+}
+.screen_capture_container{position: relative;}
+.captured_image_container::after {
+    bottom: -20px;
+    content: "\f0d7";
+    display: block;
+
+    position: absolute;
+    right: 55px;
+    text-align: center;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: 30px;
+    color:#ddd;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-rendering: auto;
 }
