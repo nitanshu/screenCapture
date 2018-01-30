@@ -1,7 +1,7 @@
 .captured_image_container {
     border: 1px solid #ddd;
     bottom: 80px;
-    height: 10%;
+    height: 12%;
     position: fixed;
     right: 13px;
     width: 10%;
@@ -25,6 +25,7 @@
 
 .captured_image {
     width: 100%;
+    height: 100%;
 }
 .screen_capture_container{position: relative;}
 .captured_image_container::after {
