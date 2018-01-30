@@ -1,6 +1,7 @@
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
-;( function( $, window, document, undefined ) {
+;
+(function ($, window, document, undefined) {
 
     'use strict';
     $('head').append('<link rel="stylesheet" href="screenCapture.css" type="text/css" />');
@@ -29,7 +30,7 @@
         };
 
     // The actual plugin constructor
-    function screenCapture ( element, options ) {
+    function screenCapture(element, options) {
         this.element = element;
         this.options = options;
 
@@ -37,7 +38,7 @@
         // more objects, storing the result in the first object. The first object
         // is generally empty as we don't want to alter the default options for
         // future instances of the plugin
-        this.settings = $.extend( {}, defaults, options );
+        this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
@@ -45,7 +46,7 @@
 
     // Avoid Plugin.prototype conflicts
     $.extend(screenCapture.prototype, {
-        init: function() {
+        init: function () {
 
             // Place initialization logic here
             // You already have access to the DOM element and
@@ -55,8 +56,8 @@
             // call them like the example below
             this.insertButton(this.element, this.settings);
         },
-        insertButton: function(element, settings){
-            var parent_element = $('.'+element.className);
+        insertButton: function (element, settings) {
+            var parent_element = $('.' + element.className);
             var screen_capture_button = document.createElement('button');
             screen_capture_button.type = 'submit';
             screen_capture_button.value = 'screen_capture';
@@ -64,40 +65,48 @@
             screen_capture_button.innerHTML = '<i class="fa fa-camera" aria-hidden="true"></i>';
             screen_capture_button.className = 'screen_capture';
             parent_element.append(screen_capture_button);
-            $('.'+screen_capture_button.className).on('click', function(e){
-                screenCapture.prototype.captureScreenShot(element, settings);
+            $('.' + screen_capture_button.className).on('click', function (e) {
+                screenCapture.prototype.insertLoader(element, settings, this);
+                screenCapture.prototype.captureScreenShot(element, settings, this);
             });
         },
-        captureScreenShot: function(element, settings) {
+        captureScreenShot: function (element, settings, screen_capture_button) {
             $.ajax({
                 url: settings.api_url,
                 type: "POST",
                 data: {screen_capture: {service_url: settings.service_url}},
-                success: function(data) {
+                success: function (data) {
                     screenCapture.prototype.showScreenShot(element, settings, data);
+                    screenCapture.prototype.removeLoader(element, settings, screen_capture_button);
                 }
             });
         },
-        showScreenShot: function(element, settings, data){
-            $('.'+element.className).append('<div class="captured_image_container"><img class="captured_image" src="' + data.img_url +'" /></div>');
+        insertLoader: function(element, settings, screen_capture_button){
+            $(screen_capture_button).html('<img src="ajax-loader.gif" class="loader">')
+        },
+        removeLoader: function(element, settings, screen_capture_button){
+            $(screen_capture_button).html('<i class="fa fa-camera" aria-hidden="true"></i>')
+        },
+        showScreenShot: function (element, settings, data) {
+            $('.' + element.className).append('<div class="captured_image_container"><img class="captured_image" src="' + data.img_url + '" /></div>');
         }
-    } );
+    });
 
     // A really lightweight plugin wrapper around the constructor,
     // preventing against multiple instantiations
-    $.fn[ pluginName ] = function( options ) {
-        return this.each( function() {
-            if ( !$.data( this, "plugin_" + pluginName ) ) {
-                $.data( this, "plugin_" +
-                    pluginName, new screenCapture( this, options ) );
+    $.fn[pluginName] = function (options) {
+        return this.each(function () {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" +
+                    pluginName, new screenCapture(this, options));
             }
 
-        } );
+        });
     };
-    $(function(){
+    $(function () {
         $('body').append('<div class="screen_capture_container"></div>');
         $('.screen_capture_container').screenCapture();
     });
 
 
-} )( jQuery, window, document );
+})(jQuery, window, document);
