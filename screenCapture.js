@@ -5,7 +5,6 @@
 
     'use strict';
     $('head').append('<link rel="stylesheet" href="screenCapture.css" type="text/css" />');
-    $('head').append('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>');
     $('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />');
 
     // undefined is used here as the undefined global variable in ECMAScript 3 is
