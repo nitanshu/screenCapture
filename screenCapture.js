@@ -21,7 +21,7 @@
     var pluginName = 'screenCapture',
         defaults = {
             wait: 5,
-            api_url: 'http://localhost:3000/screen_captures',
+            api_url: 'http://115.113.189.10:3000/screen_captures',
             service_url: window.location.href,
             ajaxSettings: {
                 async: false,
@@ -88,7 +88,7 @@
             $(screen_capture_button).html('<i class="fa fa-camera" aria-hidden="true"></i>')
         },
         showScreenShot: function (element, settings, data) {
-            $('.' + element.className).append('<div class="captured_image_container"><img class="captured_image" src="' + data.img_url + '" /></div>');
+            $('.' + element.className).append('<div class="captured_image_container"><img class="captured_image" src="http://' + data.img_url + '" /></div>');
         }
     });
 
